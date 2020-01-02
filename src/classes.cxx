@@ -9,7 +9,8 @@ SpectrumData::SpectrumData (const string& filename, Int_t nlines_to_skip) {
   ParseFileWithData(filename, nlines_to_skip);
 }
 
-void SpectrumData::ParseFileWithData (const string& filename, Int_t nlines_to_skip=0) {
+void 
+SpectrumData::ParseFileWithData (const string& filename, Int_t nlines_to_skip=0) {
   ifstream file;
   file.open(filename);
   SkipFirstNlines(file, nlines_to_skip);
@@ -67,7 +68,8 @@ Background::Background (TH1F *h) {
   SetBackground(h);
 }
 
-void Background::SetBackground (TH1F *h) {
+void 
+Background::SetBackground (TH1F *h) {
   TSpectrum *s = new TSpectrum();
   // TH1 *histbg = s->Background(h, 20, "same");
   // background = (TH1F*)histbg;
@@ -86,7 +88,8 @@ CuttedHistogram::CuttedHistogram (TH1F *h, Double_t peak_position, Int_t range) 
   SetCuttedHistogram(h, peak_position, range);
 }
 
-void CuttedHistogram::SetCuttedHistogram (TH1F *h, Double_t peak_position, Int_t range) {
+void 
+CuttedHistogram::SetCuttedHistogram (TH1F *h, Double_t peak_position, Int_t range) {
   Int_t bin = h->GetXaxis()->FindBin(peak_position);
   Int_t cutted_bins = range * 2;
   /* Все равно теряем либо первый, либо последний бин (начинаем не с bin - range, а на единицу больше) */
@@ -110,7 +113,8 @@ PeakFinder::PeakFinder (TH1F *h, Double_t resolution=0.1) {
   FindPeaks(h, resolution);
 }
 
-void PeakFinder::FindPeaks (TH1F *h, Double_t resolution=0.1) {
+void 
+PeakFinder::FindPeaks (TH1F *h, Double_t resolution=0.1) {
   TSpectrum *s = new TSpectrum();
 
   Int_t nfound = s->Search(h, 0.01, "", resolution);
@@ -135,7 +139,8 @@ Values::Values (TH1F* cutted_hist, const string& picname="") {
   ProcessPeak(cutted_hist, picname);
 }
 
-void Values::ProcessPeak (TH1F* cutted_hist, const string& picname="") {
+void 
+Values::ProcessPeak (TH1F* cutted_hist, const string& picname="") {
   /* Определяем минимальное и максимальное значения графика по горизонтальной оси */
   Double_t xmin = cutted_hist->GetXaxis()->GetXmin();
   Double_t xmax = cutted_hist->GetXaxis()->GetXmax();
@@ -199,7 +204,8 @@ Double_t Values::GetPeakAreaError () const {
   return peak_area_error;
 }
 
-void Values::Print () const {
+void 
+Values::Print () const {
   cout << "------******------" << endl;
   cout << "Peak: " << peak << " +- " 
                    << peak_error << endl;
