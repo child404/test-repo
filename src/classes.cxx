@@ -35,7 +35,8 @@ Histogram::Histogram (const Data& data) {
   SetHistogram(data);
 }
 
-void Histogram::SetHistogram (const Data& data) {
+void 
+Histogram::SetHistogram (const Data& data) {
   vector<Double_t> energy = data.GetXaxisData();
   vector<Double_t> intensity = data.GetYaxisData();
 
@@ -51,7 +52,8 @@ TH1F* Histogram::GetHistogram () const {
   return hist;
 }
 
-void Histogram::DrawHistogram () const {
+void 
+Histogram::DrawHistogram () const {
   TCanvas *c2 = new TCanvas("c2", "Histogram", 1500, 500);
   // TCanvas *c2 = new TCanvas("c", "Hist", 10, 10, 1000, 900);
   hist->Draw("hist");
