@@ -1,0 +1,41 @@
+# default paths
+PROJECT = /home/vlodek/Study/Experimental-data-evaluation-methods/Golinka-Bezshyyko/mytasks/lab/project
+
+# define variables
+ROOTCFLAGS    = $(shell $(ROOTSYS)/bin/root-config --cflags)
+ROOTLIBS      = $(shell $(ROOTSYS)/bin/root-config --libs)
+ROOTGLIBS     = $(shell $(ROOTSYS)/bin/root-config --glibs)
+
+# add xml files
+ROOTLIBS += -lMLP -lXMLIO
+
+# add TSpectrum
+ROOTLIBS += -lSpectrum
+
+OUTLIB = ./obj/
+CXX  = g++
+CXX += -I./     
+
+CXXFLAGS  = -g -Wall -fPIC -Wno-deprecated
+CXXFLAGS += $(ROOTCFLAGS)
+CXXFLAGS += $(ROOTLIBS)
+CXXFLAGS += $(ROOTGLIBS)
+
+PATHTOSHAREDLIB=$(OUTLIB)
+
+vpath %.cxx src
+vpath %.h include
+
+#----------------------------------------------------#
+
+all: main
+
+main: main.cxx
+	$(CXX) -o $@ $^ $(CXXFLAGS)
+test: test.cpp
+	$(CXX) -o $@ $^ $(CXXFLAGS)
+  
+
+clean: 
+	rm -f *~
+	rm -f main
